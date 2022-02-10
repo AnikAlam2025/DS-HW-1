@@ -7,6 +7,7 @@
 public class Term {
     //variables
     private int coefficient, exponent;
+    private static final int DEFAULT_COEFFICIENT = 1, DEFAULT_EXPONENT = 1;
     private char letter;
 
     /**
@@ -21,23 +22,63 @@ public class Term {
         this.letter = letter;
     }
 
-    //Constructor
-    public Term() {
+    //Full Constructor
+    public Term(int coefficient, int exponent) {
+        if(!this.setAll(coefficient, exponent)) {
+            System.out.println("invalid data given to term constructor");
+            System.exit(0);
+        }
+    }
 
+    //Copy Constructor
+    public Term(Term original) {
+        if(original == null) {
+            System.out.println("Invalid data given to copy constructor");
+            System.exit(0);
+        } else {
+            this.setAll(original.coefficient, original.exponent);
+        }
+    }
+
+    //Test string constructor
+    public Term(String t) {
+        if(!this.setAll(coefficient, exponent)) {
+            System.out.println("invalid data given to term constructor");
+            System.exit(0);
+        }
+    }
+
+    //Default Constructor
+    public Term() {
+        this(DEFAULT_COEFFICIENT, DEFAULT_EXPONENT);
     }
 
     //Setters
 
-    public void setCoefficient(int coefficient) {
-        this.coefficient = coefficient;
+    public boolean setCoefficient(int coefficient) {
+        if(coefficient >= 0 || coefficient <= 0) {
+            this.coefficient = coefficient;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void setExponent(int exponent) {
-        this.exponent = exponent;
+    public boolean setExponent(int exponent) {
+        if(exponent >= 0 || exponent <= 0) {
+            this.exponent = exponent;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setLetter(char letter) {
         this.letter = letter;
+    }
+
+    public boolean setAll(int c, int e) {
+        return this.setCoefficient(c) && this.setExponent(e);
     }
 
 
@@ -57,10 +98,11 @@ public class Term {
     //toString
     @Override
     public String toString() {
+
         //converting the coefficient and the letter to string values
         String coefficientString = String.valueOf(coefficient), letterString = String.valueOf(letter); //convert coefficient/letter to strings
 
-        //if the polynomial doesn't have a variable attached to it, the coefficient itself should be returned
+        //if the term doesn't have a variable attached to it, the coefficient itself should be returned
         if(letter == '\u0000'){
             return coefficientString;
         }
@@ -81,5 +123,8 @@ public class Term {
         return coefficientString + letterString + "^" + exponent;
     }
 
+    public int compareTo(Term test) {
 
+        return 1;
+    }
 }
