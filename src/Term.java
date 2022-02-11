@@ -1,7 +1,6 @@
 /**
  * Contains polynomial terms that are broken up into: positive/negative, Coefficient, Letter(ex: x), Power symbol, exponent
  *
- *
  */
 
 public class Term {
@@ -22,7 +21,11 @@ public class Term {
         this.letter = letter;
     }
 
-    //Full Constructor
+    /**
+     *
+     * @param coefficient
+     * @param exponent
+     */
     public Term(int coefficient, int exponent) {
         if(!this.setAll(coefficient, exponent)) {
             System.out.println("invalid data given to term constructor");
@@ -30,7 +33,10 @@ public class Term {
         }
     }
 
-    //Copy Constructor
+    /**
+     *
+     * @param original
+     */
     public Term(Term original) {
         if(original == null) {
             System.out.println("Invalid data given to copy constructor");
@@ -40,7 +46,10 @@ public class Term {
         }
     }
 
-    //Test string constructor
+    /**
+     *
+     * @param t
+     */
     public Term(String t) {
         if(!this.setAll(coefficient, exponent)) {
             System.out.println("invalid data given to term constructor");
@@ -48,12 +57,12 @@ public class Term {
         }
     }
 
-    //Default Constructor
+    /**
+     *Default constructor
+     */
     public Term() {
         this(DEFAULT_COEFFICIENT, DEFAULT_EXPONENT);
     }
-
-    //Setters
 
     public boolean setCoefficient(int coefficient) {
         if(coefficient >= 0 || coefficient <= 0) {
@@ -95,7 +104,10 @@ public class Term {
         return letter;
     }
 
-    //toString
+    /**
+     * toString method
+     * @return
+     */
     @Override
     public String toString() {
 
@@ -123,6 +135,11 @@ public class Term {
         return coefficientString + letterString + "^" + exponent;
     }
 
+    /**
+     * compareTo method
+     * @param test
+     * @return
+     */
     public int compareTo(Term test) {
 
         return 1;
