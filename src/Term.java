@@ -3,7 +3,7 @@
  *
  */
 
-public class Term {
+public class Term implements Comparable<Term>{
     //variables
     private int coefficient, exponent;
     private static final int DEFAULT_COEFFICIENT = 1, DEFAULT_EXPONENT = 1;
@@ -15,11 +15,11 @@ public class Term {
      * @param exponent
      * @param letter
      */
-    public Term(int coefficient, int exponent, char letter) {
-        this.coefficient = coefficient;
-        this.exponent = exponent;
-        this.letter = letter;
-    }
+//    public Term(int coefficient, int exponent, char letter) {
+//        this.coefficient = coefficient;
+//        this.exponent = exponent;
+//        this.letter = letter;
+//    }
 
     /**
      *
@@ -48,12 +48,14 @@ public class Term {
 
     /**
      *
-     * @param t
+     * @param term
      */
-    public Term(String t) {
+    public Term(String term) {
         if(!this.setAll(coefficient, exponent)) {
             System.out.println("invalid data given to term constructor");
             System.exit(0);
+        } else {
+
         }
     }
 
@@ -141,7 +143,11 @@ public class Term {
      * @return
      */
     public int compareTo(Term test) {
+        return Integer.compare(exponent, test.exponent);
+    }
 
-        return 1;
+    public Object duplicate() {
+        Term term = new Term(this);
+        return term;
     }
 }
