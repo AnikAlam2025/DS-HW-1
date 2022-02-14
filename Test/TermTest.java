@@ -30,6 +30,9 @@ public class TermTest {
     private static final int ORIGINAL_BEFORE_TEST = -1;
     //private static final int ORIGINAL_AFTER_TEST = 1; //not used
 
+    /**
+     * testing the setter and getter methods for coefficient
+     */
     @Test
     public void testGetSetCoefficient() {
         Term test = new Term();
@@ -40,6 +43,9 @@ public class TermTest {
         }
     }
 
+    /**
+     * testing the setter and getter methods for exponent
+     */
     @Test
     public void testGetSetExponent() {
         Term test = new Term();
@@ -50,6 +56,9 @@ public class TermTest {
         }
     }
 
+    /**
+     * testing set all method by setting c and e to the value of coefficient and exponent at index i
+     */
     @Test
     public void testSetAll() {
         Term test = new Term();
@@ -66,6 +75,10 @@ public class TermTest {
         }
     }
 
+    /**
+     * testing the toString method by setting c and e to the value of coefficient and exponent at index i
+     * and having the expected value equate to a term at index i to compare the two
+     */
     @Test
     public void testToString() {
         Term test = new Term();
@@ -85,6 +98,9 @@ public class TermTest {
         }
     }
 
+    /**
+     * Testing the full constructor of Term
+     */
     @Test
     public void testFullConstructor() {
         Term test;
@@ -102,6 +118,9 @@ public class TermTest {
         }
     }
 
+    /**
+     * testing the default constructor of term
+     */
     @Test
     public void testDefaultConstructor() {
         Term test = new Term();
@@ -110,6 +129,9 @@ public class TermTest {
         assertEquals("Expected and actual exponents DON'T match", 1, test.getExponent());
     }
 
+    /**
+     * testing the copy constructor of term
+     */
     @Test
     public void testCopyConstructor() {
         Term original = new Term(-5, 10);
@@ -123,6 +145,9 @@ public class TermTest {
                 original != copy);
     }
 
+    /**
+     * testing the String constructor
+     */
     @Test
     public void testStringConstructor() {
         Term test;
@@ -142,6 +167,9 @@ public class TermTest {
         }
     }
 
+    /**
+     * Makes two terms with the same coefficient and exponent at index i and checks to see if both are equal
+     */
     @Test
     public void testEqualsTrue() {
         Term test1, test2;
@@ -158,6 +186,9 @@ public class TermTest {
         }
     }
 
+    /**
+     * Makes two terms; one with c and e at index i, and the other with c and e at index i-1
+     */
     @Test
     public void testEqualsFalse() {
         Term test1, test2;
@@ -174,20 +205,25 @@ public class TermTest {
         }
     }
 
+    /**
+     * testing a clone method which takes a term and makes a copy of that term
+     */
+    @Test
+    public void testClone() {
+        Term original = new Term(10, -5);
+        Term copy = (Term)original.clone();
 
-//    @Test
-//    public void testClone() {
-//        Term original = new Term(10, -5);
-//        Term copy = (Term)original.duplicate();
-//
-//        assertEquals("Coefficients in 'copy' does not match 'original'",
-//                original.getCoefficient(), copy.getCoefficient());
-//        assertEquals("Exponents in 'copy' does not match 'original'",
-//                original.getExponent(), copy.getExponent());
-//        assertTrue("Reference is not a unique memory address (shallow copy)",
-//                original != copy);
-//    }
+        assertEquals("Coefficients in 'copy' does not match 'original'",
+                original.getCoefficient(), copy.getCoefficient());
+        assertEquals("Exponents in 'copy' does not match 'original'",
+                original.getExponent(), copy.getExponent());
+        assertTrue("Reference is not a unique memory address (shallow copy)",
+                original != copy);
+    }
 
+    /**
+     * testing compareTo method to see if exponent e at index i for test term is equal to the compared result
+     */
     @Test
     public void testCompareTo() {
         Term original = new Term(1, COMPARE_TO_VALUE), test;

@@ -106,7 +106,9 @@ public class PolynomialTest {
                             new Term(-2, -1),
     };
 
-
+    /**
+     * Testing size of polynomial as an empty list and with a term
+     */
     @Test
     public void testUniqueAddTermTypeBySizeOfList1() {
         Polynomial test = new Polynomial();
@@ -117,6 +119,10 @@ public class PolynomialTest {
             assertEquals("Term was NOT added to list of terms", i+1, test.getNumTerms());
         }
     }
+
+    /**
+     * Testing size of polynomial as an empty list and with a term
+     */
     @Test
     public void testUniqueAddTermTypeBySizeOfList2() {
         Polynomial test = new Polynomial();
@@ -128,7 +134,9 @@ public class PolynomialTest {
         }
     }
 
-
+    /**
+     * Testing to see if a polynomial is output correctly
+     */
     @Test
     public void testToStringUnique1() {
         Polynomial test = new Polynomial();
@@ -146,6 +154,9 @@ public class PolynomialTest {
         }
     }
 
+    /**
+     * Testing to see if a polynomial is output correctly
+     */
     @Test
     public void testToStringUnique2() {
         Polynomial test = new Polynomial();
@@ -163,6 +174,9 @@ public class PolynomialTest {
         }
     }
 
+    /**
+     * testing to see if terms are added in a polynomial object in a particular order
+     */
     @Test
     public void testUniqueAddTermTypeByFinalPositions1() {
         Term actualOrderedTerm, expectedOrderedTerm;
@@ -183,6 +197,9 @@ public class PolynomialTest {
         }
     }
 
+    /**
+     * testing to see if terms are added in a polynomial object in a particular order
+     */
     @Test
     public void testUniqueAddTermTypeByFinalPositions2() {
         Term actualOrderedTerm, expectedOrderedTerm;
@@ -203,6 +220,9 @@ public class PolynomialTest {
         }
     }
 
+    /**
+     *
+     */
     @Test
     public void testDuplicateAddTermTypeBySizeOfList() {
         int finalSize = DUPLICATE_TERMS.length - DUPLICATE_NUM;
@@ -223,6 +243,9 @@ public class PolynomialTest {
         }
     }
 
+    /**
+     * test creates a new polynomial object and compares it to the order of each term in expectedOrderedTerm
+     */
     @Test
     public void testDuplicateAddTermTypeByFinalPositions() {
         Term actualOrderedTerm, expectedOrderedTerm;
@@ -241,6 +264,9 @@ public class PolynomialTest {
         }
     }
 
+    /**
+     * testing the clear method to see if all terms in the test polynomial are properly cleared
+     */
     @Test
     public void testClear() {
         Polynomial test = new Polynomial();
@@ -255,6 +281,9 @@ public class PolynomialTest {
         assertEquals("Size of built polynomial > 0 (should be empty list!)", 0, test.getNumTerms());
     }
 
+    /**
+     * testing add and addTerm methods to see if like terms are combined and a larger polynomial is made
+     */
     @Test
     public void testAddPolynomials() {
         Polynomial test1 = new Polynomial(), test2 = new Polynomial();
@@ -277,6 +306,9 @@ public class PolynomialTest {
         }
     }
 
+    /**
+     * Testing copy constructor
+     */
     @Test
     public void testCopyConstructor() {
         Polynomial original = new Polynomial(), copy;

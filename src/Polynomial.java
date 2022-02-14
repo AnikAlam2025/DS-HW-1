@@ -114,7 +114,12 @@ public class Polynomial {
             } else {
                 exponent = "x^" + exponent;
             }
-            finalPolynomial += coefficient + exponent;
+
+            if(numTerms.size() > 1) {
+                finalPolynomial += coefficient + exponent + "+";
+            } else {
+                finalPolynomial += coefficient + exponent;
+            }
         }
         return finalPolynomial;
     }

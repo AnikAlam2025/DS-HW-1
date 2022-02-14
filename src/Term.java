@@ -15,11 +15,11 @@ public class Term implements Comparable<Term>{
      * @param exponent
      * @param letter
      */
-//    public Term(int coefficient, int exponent, char letter) {
-//        this.coefficient = coefficient;
-//        this.exponent = exponent;
-//        this.letter = letter;
-//    }
+    public Term(int coefficient, int exponent, char letter) {
+        this.coefficient = coefficient;
+        this.exponent = exponent;
+        this.letter = letter;
+    }
 
     /**
      *
@@ -122,10 +122,12 @@ public class Term implements Comparable<Term>{
         }
 
         //Polynomial terms with a positive or negative coefficient of 1 are handled by adding a negative symbol or leaving the coefficient as is
-        if(coefficient == 1) {
+        if(coefficient == 1 || coefficient == 0) {
             coefficientString = "";
         } else if(coefficient == -1) {
             coefficientString = "-";
+        } else if(coefficient == '\u0000'){
+            coefficientString = "";
         }
 
         //if exponent is either 0/1, the term will
@@ -140,14 +142,18 @@ public class Term implements Comparable<Term>{
     /**
      * compareTo method
      * @param test
-     * @return
+     * @return Integer comparison between term test's exponent and exponent
      */
     public int compareTo(Term test) {
         return Integer.compare(exponent, test.exponent);
     }
 
-    public Object duplicate() {
-        Term term = new Term(this);
-        return term;
+    /**
+     * clone method to take an existing term and make a duplicate of that term
+     * @return
+     */
+    public Object clone() {
+        Term termCopy = new Term(this);
+        return termCopy;
     }
 }
