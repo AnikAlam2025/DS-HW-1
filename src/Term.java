@@ -11,8 +11,9 @@ public class Term implements Comparable<Term>{
     private static final int DEFAULT_COEFFICIENT = 1, DEFAULT_EXPONENT = 1;
     private char letter;
 
+
     /**
-     * setALL for coefficient, and exponent for the polynomial
+     * Full Constructor for coefficient, and exponent for the polynomial
      * @param coefficient
      * @param exponent
      */
@@ -152,8 +153,9 @@ public class Term implements Comparable<Term>{
         }
 
         //Polynomial terms with a positive or negative coefficient of 1 are handled by adding a negative symbol or leaving the coefficient as is
-        if(coefficient == 1 || coefficient == 0) {
-            coefficientString = "";
+        if(coefficient == 0) {
+            coefficientString = "0";
+            return coefficientString;
         } else if(coefficient == -1) {
             coefficientString = "-";
         } else if(coefficient == '\u0000'){
@@ -165,8 +167,13 @@ public class Term implements Comparable<Term>{
             return coefficientString + letterString;
         }
 
+
         //return full polynomial
-        return coefficientString + letterString + "^" + exponent;
+        if(coefficient == 0) {
+            return "0";
+        } else {
+            return coefficientString + letterString + "^" + exponent;
+        }
     }
 
     /**

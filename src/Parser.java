@@ -73,7 +73,11 @@ public class Parser {
                 placeholderTerm.setLetter('\u0000');
             }
         }
-        System.out.println(placeholderTerm);
+        if(placeholderTerm.getCoefficient() == 0) {
+            System.out.println("0");
+        } else {
+            System.out.println(placeholderTerm);
+        }
     }
 
     //Methods to check if the associated variable to the term is a valid char(a-z), to check whether or not the polynomial is positive/negative, and to check if only a coefficient remains
@@ -111,7 +115,6 @@ public class Parser {
         if (termToCheck.contains("^")) return true;
         return false;
     }
-
 }
 
 
