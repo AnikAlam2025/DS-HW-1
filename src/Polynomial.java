@@ -4,6 +4,7 @@ import java.util.Collections;
 public class Polynomial {
     ArrayList<Term> numTerms;
 
+
     /**
      * Full Constructor method to create a polynomial object
      */
@@ -17,6 +18,7 @@ public class Polynomial {
      */
     public Polynomial(Polynomial original) {
         numTerms = new ArrayList<>();
+
 
         for (int i = 0; i < original.getNumTerms(); i++) {
             this.addTerm(new Term(original.getTerm(i)));
@@ -95,18 +97,8 @@ public class Polynomial {
             coefficient = Integer.toString(numTerm.getCoefficient()); //coefficient of term at index i
             exponent = Integer.toString(numTerm.getExponent());//exponent of term at index i
 
-            //coefficient check
-            if (numTerm.getCoefficient() == 0) {
-                return "";
-            } else if (numTerm.getCoefficient() == 1) {
-                coefficient = ((numTerm.getCoefficient() == 1)) + "+";
-            } else if (numTerm.getCoefficient() == -1) {
-                coefficient = ((numTerm.getCoefficient() == -1)) + "-";
-            } else if (numTerm.getCoefficient() > 1) {
-                coefficient = coefficient;
-            }
 
-            //exponent check
+            //exponent check; if 0 then the exponent has no value, if 1 then the exponent is simply the variable, if else then it is the variable + exponent
             if (numTerm.getExponent() == 0) {
                 exponent = "";
             } else if (numTerm.getExponent() == 1) {
@@ -115,12 +107,33 @@ public class Polynomial {
                 exponent = "x^" + exponent;
             }
 
-            if(numTerms.size() > 1) {
-                finalPolynomial += coefficient + exponent + "+";
-            } else {
+            //coefficient check
+            if (numTerm.getCoefficient() == 0) {
+                return "";
+            } else if (numTerm.getCoefficient() == 1) {
+                coefficient = ((numTerm.getCoefficient() == 1)) + "+";
+            } else if (numTerm.getCoefficient() == -1) {
+                coefficient = ((numTerm.getCoefficient() == -1)) + "-";
+            }
+
+            int lastTerm = (numTerms.size());
+
+//            while(lastTerm > 0){
+//                if(lastTerm == 1) {
+//                    finalPolynomial += coefficient + exponent;
+//                } else {
+//                    finalPolynomial += coefficient + exponent + "+";
+//                }
+//                lastTerm -= 1;
+//            }
+
+            if(finalPolynomial.contains("-")) {
                 finalPolynomial += coefficient + exponent;
+            } else {
+                finalPolynomial += "+" + coefficient + exponent;
             }
         }
-        return finalPolynomial;
+//        return finalPolynomial;
+        return finalPolynomial.substring(1, finalPolynomial.length());
     }
 }

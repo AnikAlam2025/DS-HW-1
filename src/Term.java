@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Contains polynomial terms that are broken up into: positive/negative, Coefficient, Letter(ex: x), Power symbol, exponent
  *
@@ -10,31 +12,17 @@ public class Term implements Comparable<Term>{
     private char letter;
 
     /**
-     * setALL for coefficient, exponent, and letter for the polynomial
-     * @param coefficient
-     * @param exponent
-     * @param letter
-     */
-    public Term(int coefficient, int exponent, char letter) {
-        this.coefficient = coefficient;
-        this.exponent = exponent;
-        this.letter = letter;
-    }
-
-    /**
-     *
+     * setALL for coefficient, and exponent for the polynomial
      * @param coefficient
      * @param exponent
      */
     public Term(int coefficient, int exponent) {
-        if(!this.setAll(coefficient, exponent)) {
-            System.out.println("invalid data given to term constructor");
-            System.exit(0);
-        }
+        this.coefficient = coefficient;
+        this.exponent = exponent;
     }
 
     /**
-     *
+     * copy constructor for term
      * @param original
      */
     public Term(Term original) {
@@ -47,16 +35,60 @@ public class Term implements Comparable<Term>{
     }
 
     /**
-     *
-     * @param term
+     * String constructor
+     * @param termString
      */
-    public Term(String term) {
-        if(!this.setAll(coefficient, exponent)) {
-            System.out.println("invalid data given to term constructor");
-            System.exit(0);
-        } else {
+    //initialize scanner > pass in termString > run parser methods for termString > get coefficient & exponent
+    public Term(String termString) { //need to figure this one out
+        Scanner testTerm = new Scanner(termString);
+        Term placeholderTerm = new Term();
 
+        if (Parser.hasExponent(termString)) {
+            placeholderTerm.setExponent(Integer.parseInt(termString.substring(termString.indexOf("^") + 1)));
+
+            termString = termString.substring(0, termString.indexOf("^"));
         }
+        if (Parser.onlyCoefficientLeft(termString)) {
+            placeholderTerm.setCoefficient((Integer.parseInt(termString)));
+        } else {
+            char letter = termString.charAt(termString.length() - 1);
+
+            if (Parser.isValidChar(letter)) {
+                placeholderTerm.setLetter(letter);
+            }
+            termString = termString.substring(0, termString.length() - 1);
+
+            if (Parser.signValue(termString)) {
+                if (termString.charAt(termString.length() - 1) == '-') {
+                    placeholderTerm.setCoefficient(-1);
+                }
+            } else if (termString.length() > 0) {
+                placeholderTerm.setCoefficient(Integer.parseInt(termString));
+            }
+        }
+
+        //If the coefficient is 0, variable term will be changed to a null value
+        if (placeholderTerm.getCoefficient() == 0) {
+            placeholderTerm.setLetter('\u0000');
+            placeholderTerm.setExponent(0);
+        }
+
+        //if the term is only the coefficient + an exponent with no variable term
+        if (placeholderTerm.getLetter() == '\u0000') {
+            double answer = Math.pow(Double.valueOf(placeholderTerm.getCoefficient()), Double.valueOf(placeholderTerm.getExponent()));
+            placeholderTerm.setCoefficient((int) answer);
+
+            placeholderTerm.setExponent(0);
+        }
+
+        //if the exponent is equal to 0, the variable tied to that exponent will be set to a value of 1/is removed because it doesnt change coefficient value
+        if (placeholderTerm.getLetter() == 0) {
+            if (placeholderTerm.getLetter() != '\u0000') {
+                placeholderTerm.setLetter('\u0000');
+            }
+        }
+        this.setCoefficient(placeholderTerm.getCoefficient());
+        this.setExponent(placeholderTerm.getExponent());
     }
 
     /**
@@ -83,7 +115,6 @@ public class Term implements Comparable<Term>{
             return false;
         }
     }
-
     public void setLetter(char letter) {
         this.letter = letter;
     }
@@ -91,7 +122,6 @@ public class Term implements Comparable<Term>{
     public boolean setAll(int c, int e) {
         return this.setCoefficient(c) && this.setExponent(e);
     }
-
 
     //Getters
     public int getCoefficient() {
@@ -150,7 +180,7 @@ public class Term implements Comparable<Term>{
 
     /**
      * clone method to take an existing term and make a duplicate of that term
-     * @return
+     * @return termCopy;
      */
     public Object clone() {
         Term termCopy = new Term(this);

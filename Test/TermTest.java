@@ -152,16 +152,17 @@ public class TermTest {
     public void testStringConstructor() {
         Term test;
         int c, e;
-        String t;
+        String termString;
 
         //omitting first test in array with "" since that will throw error!
         for(int i = 1; i < TERMS.length; i++) {
             c = COEFFICIENTS[i];
             e = EXPONENTS[i];
-            t = TERMS[i];
+            termString = TERMS[i];
 
-            test = new Term(t);
+            test = new Term(termString);
 
+            //each assertEquals checks if c and e at that iteration of i is equal to test
             assertEquals("Expected and actual coefficients DON'T match", c, test.getCoefficient());
             assertEquals("Expected and actual exponents DON'T match", e, test.getExponent());
         }
