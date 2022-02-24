@@ -10,9 +10,7 @@ public class Parser {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter a term: ");
-
-        //Read user input for a term and storing the value
+        //Read user input for the menu option
 
         Scanner enterTerm = new Scanner(System.in);
         String userTerm = enterTerm.next();
@@ -63,9 +61,9 @@ public class Parser {
 
         //if the coefficient is 0, the turn will return 0 otherwise it will return the value in placeholderTerm
         if(placeholderTerm.getCoefficient() == 0) {
-            System.out.println("0");
+            //System.out.println("0");
         } else {
-            System.out.println(placeholderTerm);
+            //System.out.println(placeholderTerm);
         }
     }
 
@@ -125,6 +123,7 @@ public class Parser {
             return false;
         }
     }
+
 }
 
 
