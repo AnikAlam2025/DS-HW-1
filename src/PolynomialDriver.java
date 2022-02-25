@@ -35,13 +35,12 @@ public class PolynomialDriver {
                             System.out.println("Choose which polynomial you wish to add to");
                             if(polynomial1.size() > 0) {
                                 System.out.println(polynomial1);
-                                polynomialSelection = userInput.nextInt() - 1;
+                                polynomialSelection = userInput.nextInt() - 1;//because indexing starts at 0
                                 userInput.nextLine();
                                 addTermToPolynomial(polynomial1.get(polynomialSelection));
                             } else {
                                 System.out.println("No Polynomials within the array");
                             }
-
                             break;
                         case 3: //clear polynomial arraylist
                             polynomial1.clear();

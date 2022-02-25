@@ -114,7 +114,7 @@ public class Polynomial {
     }
 
     /**
-     * method adds test 2 polynomial object to another polynomial
+     * method adds addedPolynomial polynomial object to another polynomial
      */
     public Polynomial add(Polynomial addedPolynomial) {
         Polynomial original = new Polynomial(this);

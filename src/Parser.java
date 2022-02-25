@@ -11,6 +11,7 @@ public class Parser {
     public static void main(String[] args) {
 
         //Read user input for the menu option
+        System.out.println("Enter a term");
 
         Scanner enterTerm = new Scanner(System.in);
         String userTerm = enterTerm.next();
@@ -47,23 +48,27 @@ public class Parser {
             }
         }
 
+        //if the term's coefficient equals 0
         if (placeholderTerm.getCoefficient() == 0) {
             placeholderTerm.setLetter('\u0000'); //variable is set to a null value if variable == 0
-            placeholderTerm.setExponent(1);//exponent is set to 1, if set to 0, the term will return 1 which is incorrect
+            if (placeholderTerm.getExponent() == 0) {
+                System.out.println("Indeterminate Value");
+                System.exit(0);
+            }
+            placeholderTerm.setExponent(1);//exponent is set to 1, if set to 0, the term will then return 1 which is incorrect
         }
 
         //if the term is only the coefficient + an exponent with no variable
         if (placeholderTerm.getLetter() == '\u0000') {
             double answer = Math.pow(placeholderTerm.getCoefficient(), placeholderTerm.getExponent());//value is set to the number to the power of the exponent(5^2 = 25)
             placeholderTerm.setCoefficient((int) answer);
-            placeholderTerm.setExponent(1); //exponent is then set to one so the value remains the same
         }
 
         //if the coefficient is 0, the turn will return 0 otherwise it will return the value in placeholderTerm
         if(placeholderTerm.getCoefficient() == 0) {
-            //System.out.println("0");
-        } else {
-            //System.out.println(placeholderTerm);
+            System.out.println("0");
+        }else {
+            System.out.println(placeholderTerm);
         }
     }
 
@@ -117,13 +122,15 @@ public class Parser {
      * @return
      */
     static boolean hasExponent(String termChecked) {
-        if (termChecked.contains("^")){
+        String validNumbers = "0123456789";
+        if(termChecked.contains("^") && validNumbers.contains(String.valueOf(termChecked.charAt(termChecked.length() - 1)))) {
             return true;
-        } else {
+        }else {
+            System.out.println("Term does not contain an exponent or exponent was invalid");
+            System.exit(0);
             return false;
         }
     }
-
 }
 
 
