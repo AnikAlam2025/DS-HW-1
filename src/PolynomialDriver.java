@@ -12,10 +12,12 @@ public class PolynomialDriver {
         ArrayList<Polynomial> polynomial1 = new ArrayList<>();
         ArrayList<Polynomial> polynomial2 = new ArrayList<>();
         Polynomial sumOfPolynomials;
-        int menuChoice, subMenuChoice, polynomialSelection;
+        int menuChoice, subMenuChoice, polynomialSelection, polynomial1Selection, polynomial2Selection;
 
         //main menu switch case
         do { //dowhile loop will run the menu until the user input is any of the valid options besides 4 which exits the program
+            System.out.println("Polynomial 1: " + polynomial1);
+            System.out.println("Polynomial 2: " + polynomial2);
             System.out.println("1)Edit Polynomial 1\n2)Edit Polynomial 2\n3)Combine Polynomial 1 & 2\n4) Exit Program");
 
             menuChoice = userInput.nextInt();
@@ -44,17 +46,54 @@ public class PolynomialDriver {
                             break;
                         case 3: //clear polynomial arraylist
                             polynomial1.clear();
-                            System.out.println("Polynomial 1: " + polynomial1);
                             break;
                         default:
                             System.out.println("Invalid input, please enter a number between 1-3");
                     }
                     break;
                 case 2: //editing polynomial 2
-                    System.out.println("2");
+                    System.out.println("Polynomial 2: " + polynomial2);
+
+                    System.out.println("1)Create A Polynomial\n2)Add a term to the Polynomial\n3)Clear Polynomial");
+                    subMenuChoice = userInput.nextInt();
+                    switch (subMenuChoice) {
+                        case 1: //create a polynomial and add it to the polynomial arraylist
+                            Polynomial p2 = new Polynomial();
+                            polynomial2.add(p2);
+                            addTermToPolynomial(p2);
+                            break;
+                        case 2: //add terms to the selected polynomial from the arraylist
+                            System.out.println("Choose which polynomial you wish to add to");
+                            if(polynomial2.size() > 0) {
+                                System.out.println(polynomial2);
+                                polynomialSelection = userInput.nextInt() - 1;
+                                userInput.nextLine();
+                                addTermToPolynomial(polynomial2.get(polynomialSelection));
+                            } else {
+                                System.out.println("No Polynomials within the array");
+                            }
+                            break;
+                        case 3: //clear polynomial arraylist
+                            polynomial2.clear();
+                            break;
+                        default:
+                            System.out.println("Invalid input, please enter a number between 1-3");
+                    }
                     break;
-                case 3: //combining both polynomials
-                    System.out.println("3");
+                case 3: //combining a polynomial from 1 and a polynomial from 2
+
+                    System.out.println("Choose a polynomial from polynomial1: " + polynomial1);
+                    polynomial1Selection = userInput.nextInt() - 1;
+                    Polynomial placeHolder1 = new Polynomial(polynomial1.get(polynomial1Selection)); //makes a copy of the selected polynomial in poly1
+
+                    System.out.println("Choose a polynomial from polynomial2: " + polynomial2);
+                    polynomial2Selection = userInput.nextInt() - 1;
+                    Polynomial placeHolder2 = new Polynomial(polynomial2.get(polynomial2Selection));
+
+
+                    placeHolder1.add(placeHolder2);
+                    System.out.println("Combined Polynomial: " + placeHolder1);
+
                     break;
                 case 4:
                     System.out.println("Exiting program");
@@ -66,6 +105,10 @@ public class PolynomialDriver {
         } while (menuChoice != 4); //if menuChoice = 4, the menu loop will end
     }
 
+    /**
+     * 
+     * @param p
+     */
     public static void addTermToPolynomial(Polynomial p) {
         String userTerm;
         System.out.println("Enter in a term");

@@ -11,7 +11,6 @@ public class Term implements Comparable<Term>{
     private static final int DEFAULT_COEFFICIENT = 1, DEFAULT_EXPONENT = 1;
     private char letter;
 
-
     /**
      * Full Constructor for coefficient, and exponent for the polynomial
      * @param coefficient
@@ -77,8 +76,8 @@ public class Term implements Comparable<Term>{
 
         //if the term is only the coefficient + an exponent with no variable term, it will take the power and apply it to the term to find the answer
         if (placeholderTerm.getLetter() == '\u0000') {
-            double answer = Math.pow(Double.valueOf(placeholderTerm.getCoefficient()), Double.valueOf(placeholderTerm.getExponent()));
-            placeholderTerm.setCoefficient((int) answer);
+//            int answer = (int) Math.pow(Integer.valueOf(placeholderTerm.getCoefficient()), Integer.valueOf(placeholderTerm.getExponent()));
+//            placeholderTerm.setCoefficient(answer);
 
             placeholderTerm.setExponent(0);
         }
@@ -86,6 +85,7 @@ public class Term implements Comparable<Term>{
         this.setCoefficient(placeholderTerm.getCoefficient());
         this.setExponent(placeholderTerm.getExponent());
     }
+
 
     //setters
     public void setCoefficient(int coefficient) {
@@ -135,7 +135,7 @@ public class Term implements Comparable<Term>{
 
         //Polynomial terms with a positive or negative coefficient of 1 are handled by adding a negative symbol or leaving the coefficient as is
         if(coefficient == 0) {
-            coefficientString = "0";
+            coefficientString = "";
             return coefficientString;
         } else if(coefficient == -1) {
             coefficientString = "-";
@@ -170,4 +170,5 @@ public class Term implements Comparable<Term>{
         Term termCopy = new Term(this);
         return termCopy;
     }
+
 }

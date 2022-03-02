@@ -19,7 +19,6 @@ public class Polynomial {
     public Polynomial(Polynomial original) {
         numTerms = new ArrayList<>();
 
-
         for (int i = 0; i < original.getNumTerms(); i++) {
             this.addTerm(new Term(original.getTerm(i)));
         }
@@ -95,8 +94,11 @@ public class Polynomial {
      * @param term
      */
     public void addTerm(Term term) {
+
         boolean comparedTerm = false;
+
         for (int i = 0; i < numTerms.size(); i++) {
+
             if(numTerms.get(i).getExponent() == term.getExponent()) { //if exponents are equal, combine like terms
                 comparedTerm = true;
                 numTerms.get(i).setCoefficient(term.getCoefficient() + numTerms.get(i).getCoefficient()); //sets coefficient of term at index i to the sum of term's coefficient and numTerm at index i
@@ -109,6 +111,7 @@ public class Polynomial {
         if(!comparedTerm) {
             numTerms.add(term);
         }
+
         Collections.sort(numTerms);
         Collections.reverse(numTerms);
     }

@@ -126,11 +126,7 @@ public class Parser {
         if(termChecked.contains("^") && validNumbers.contains(String.valueOf(termChecked.charAt(termChecked.length() - 1)))) {
             return true;
         }else {
-            System.out.println("Term does not contain an exponent or exponent was invalid");
-            System.exit(0);
             return false;
         }
     }
 }
-
-
