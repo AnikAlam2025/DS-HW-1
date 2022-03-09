@@ -1,16 +1,16 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
  * Driver class to create, edit, and display polynomials
  */
 
-public class PolynomialDriver {
+public class PolynomialLinkedListDriver {
     public static Scanner userInput = new Scanner(System.in);
 
     public static void main(String[] args) {
-        ArrayList<Polynomial> polynomial1 = new ArrayList<>();
-        ArrayList<Polynomial> polynomial2 = new ArrayList<>();
+        LinkedList<Polynomial> polynomial1 = new LinkedList<>();
+        LinkedList<Polynomial> polynomial2 = new LinkedList<>();
         Polynomial sumOfPolynomials;
         int menuChoice, subMenuChoice, polynomialSelection, polynomial1Selection, polynomial2Selection;
 

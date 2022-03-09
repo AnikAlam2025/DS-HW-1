@@ -150,7 +150,11 @@ public class Term implements Comparable<Term>{
             return coefficientString + letterString;
         }
 
-        return coefficientString + letterString + "^" + exponent;
+        if(coefficient == 0) {
+            return " ";
+        } else {
+            return coefficientString + letterString + "^" + exponent;
+        }
     }
 
     /**

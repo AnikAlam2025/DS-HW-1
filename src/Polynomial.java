@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -32,6 +33,7 @@ public class Polynomial {
     public Term getTerm(int i) {
         return numTerms.get(i);
     }
+
 
 
     /**
