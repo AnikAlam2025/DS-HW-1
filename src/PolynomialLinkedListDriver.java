@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ public class PolynomialLinkedListDriver {
     public static void main(String[] args) {
         LinkedList<Polynomial> polynomial1 = new LinkedList<>();
         LinkedList<Polynomial> polynomial2 = new LinkedList<>();
+        System.out.println(polynomial1);
         Polynomial sumOfPolynomials;
         int menuChoice, subMenuChoice, polynomialSelection, polynomial1Selection, polynomial2Selection;
 

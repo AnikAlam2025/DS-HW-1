@@ -1,10 +1,10 @@
 //Linked List implementation class for Polynomials
+
 import java.util.LinkedList;
 import java.util.Collections;
 
 public class PolynomialLinkedList {
     LinkedList<Term> numTermsLinked;
-
 
     /**
      * Full Constructor method to create a polynomial object
@@ -33,8 +33,6 @@ public class PolynomialLinkedList {
     public Term getTermLinked(int i) {
         return numTermsLinked.get(i);
     }
-
-
 
     /**
      * toString method

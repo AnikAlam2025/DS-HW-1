@@ -11,6 +11,7 @@ public class Term implements Comparable<Term>{
     private static final int DEFAULT_COEFFICIENT = 1, DEFAULT_EXPONENT = 1;
     private char letter;
 
+
     /**
      * Full Constructor for coefficient, and exponent for the polynomial
      * @param coefficient
@@ -46,9 +47,9 @@ public class Term implements Comparable<Term>{
      * @param termString
      */
     //initialize scanner > pass in termString > run parser methods for termString > get coefficient & exponent
-    public Term(String termString) {
+    public Term(String termString) { // following this example: ""
         Scanner testTerm = new Scanner(termString);
-        Term placeholderTerm = new Term();
+        Term placeholderTerm = new Term(); // make a term with c=1, e=1
 
         if (Parser.hasExponent(termString)) { //if termString has an exponent, parse up to one past the carrot and set that value as the exponent for placeholder
             placeholderTerm.setExponent(Integer.parseInt(termString.substring(termString.indexOf("^") + 1)));
@@ -76,8 +77,6 @@ public class Term implements Comparable<Term>{
 
         //if the term is only the coefficient + an exponent with no variable term, it will take the power and apply it to the term to find the answer
         if (placeholderTerm.getLetter() == '\u0000') {
-//            int answer = (int) Math.pow(Integer.valueOf(placeholderTerm.getCoefficient()), Integer.valueOf(placeholderTerm.getExponent()));
-//            placeholderTerm.setCoefficient(answer);
 
             placeholderTerm.setExponent(0);
         }
@@ -126,34 +125,68 @@ public class Term implements Comparable<Term>{
     public String toString() {
 
         //converting the coefficient and the letter to string values
-        String coefficientString = String.valueOf(coefficient), letterString = String.valueOf(letter); //convert coefficient/letter to strings
+        String coefficientString = String.valueOf(coefficient), letterString = "x"; //convert coefficient/letter to strings
 
+        if(coefficient > 0) {
+            if(coefficient > 1 && exponent == 1) {
+                coefficientString = "+" + coefficientString + letterString;
+            } else if(coefficient > 1 && exponent > 1) {
+                coefficientString = "+" + coefficientString + letterString + "^" + exponent;
+            } else if(coefficient > 1 && exponent < -1) {
+                coefficientString = "+" + coefficientString + letterString + "^" + exponent;
+            } else if(coefficient > 1) {
+                coefficientString = "+" + coefficientString;
+            } else if(coefficient == 1 && exponent > 1) {
+                return "+" + letterString + "^" + exponent;
+            } else if(coefficient == 1 && exponent < -1) {
+                return "+" + letterString + "^" + exponent;
+            } else if(coefficient == 1) {
+                return "+" + letterString;
+            }
+        } else if(coefficient < 0) {
+            if(coefficient < -1 && exponent == 1) {
+                coefficientString = coefficientString + letterString;
+            } else if(coefficient < -1 && exponent > 1) {
+                coefficientString = coefficientString + letterString + "^" + exponent;
+            } else if(coefficient < -1 && exponent < -1) {
+                coefficientString = coefficientString + letterString + "^" + exponent;
+            } else if(coefficient == -1 && exponent > 1) {
+                return "-" + letterString + "^" + exponent;
+            } else if(coefficient == -1 && exponent < -1){
+                return "-" + letterString + "^" + exponent;
+            } else if(coefficient == -1) {
+                return "-" + letterString;
+            }
+        }
         //if the term doesn't have a variable attached to it, the coefficient itself is returned
-        if(letter == '\u0000'){
+        if(coefficient != 0){
             return coefficientString;
         }
 
-        //Polynomial terms with a positive or negative coefficient of 1 are handled by adding a negative symbol or leaving the coefficient as is
-        if(coefficient == 0) {
-            coefficientString = "";
-            return coefficientString;
-        } else if(coefficient == -1) {
-            coefficientString = "-";
-        } else if(coefficient == 1) {
-            return coefficientString;
-        } else if(coefficient == '\u0000') {
-            coefficientString = "";
-        }
-
-        //if term's exponent is either 0/1 but has a coefficient + variable, the term will just return the coefficient and variable
-        if(exponent == 0 || exponent == 1) {
-            return coefficientString + letterString;
-        }
 
         if(coefficient == 0) {
             return " ";
         } else {
             return coefficientString + letterString + "^" + exponent;
+
+
+            //Polynomial terms with a positive or negative coefficient of 1 are handled by adding a negative symbol or leaving the coefficient as is
+//        if(coefficient == 0) {
+//            coefficientString = "";
+//            return coefficientString;
+//        } else if(coefficient == -1) {
+//            coefficientString = "-";
+//        } else if(coefficient == 1) {
+//            return coefficientString;
+//        } else if(coefficient == '\u0000') {
+//            coefficientString = "";
+//        }
+
+            //if term's exponent is either 0/1 but has a coefficient + variable, the term will just return the coefficient and variable
+//        if(exponent == 0 || exponent == 1) {
+//            return coefficientString + letterString;
+//        }
+//
         }
     }
 
