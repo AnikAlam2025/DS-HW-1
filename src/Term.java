@@ -75,7 +75,7 @@ public class Term implements Comparable<Term>{
             }
         }
 
-        //if the term is only the coefficient + an exponent with no variable term, it will take the power and apply it to the term to find the answer
+//        //if the term is only the coefficient + an exponent with no variable term, it will take the power and apply it to the term to find the answer
         if (placeholderTerm.getLetter() == '\u0000') {
 
             placeholderTerm.setExponent(0);
@@ -168,25 +168,6 @@ public class Term implements Comparable<Term>{
             return " ";
         } else {
             return coefficientString + letterString + "^" + exponent;
-
-
-            //Polynomial terms with a positive or negative coefficient of 1 are handled by adding a negative symbol or leaving the coefficient as is
-//        if(coefficient == 0) {
-//            coefficientString = "";
-//            return coefficientString;
-//        } else if(coefficient == -1) {
-//            coefficientString = "-";
-//        } else if(coefficient == 1) {
-//            return coefficientString;
-//        } else if(coefficient == '\u0000') {
-//            coefficientString = "";
-//        }
-
-            //if term's exponent is either 0/1 but has a coefficient + variable, the term will just return the coefficient and variable
-//        if(exponent == 0 || exponent == 1) {
-//            return coefficientString + letterString;
-//        }
-//
         }
     }
 
@@ -206,6 +187,19 @@ public class Term implements Comparable<Term>{
     public Object clone() {
         Term termCopy = new Term(this);
         return termCopy;
+    }
+
+    public boolean equals(Object other)
+    {
+        if (other == null || other.getClass() != this.getClass())
+        {
+            return false;
+        }
+        else
+        {
+            Term otherTerm = (Term) other;
+            return this.coefficient == otherTerm.getCoefficient() && this.exponent == otherTerm.getExponent();
+        }
     }
 
 }
